@@ -8,6 +8,46 @@ class ExpressionTree_node:
 class Expression_Tree:
     def __init__(self):
         self.root = None
+    def parInfixExpr_to_tree(self,infixExpr):
+        #we want to make a tree of an infix expression with complete parenthesis
+        #we begin with the first null node:
+        node = self.root
+        #we iterate the string of expression & make the appropriate node for each character:
+        for i in range (len(infixExpr)):
+            if self.is_operator(infixExpr[i]):
+                node.data = infixExpr[i]
+                #each operator has 1 or 2 operand(s) & is located befor or between them(operands)
+                #so after an operator in string,we meet the right-side operand
+                #so:
+                node = node.right_child
+            elif (infixExpr[i] == '('):
+                #
+                node = node.right_child
+            elif (infixExpr[i] == ')'):
+                #
+                node = node.left_child
+            else: #is operand
+                node.data = infixExpr[i]
+                #each operand in expression is located befor or after an operator
+                #so either its the right-side or left-side operand we should go back to its parent node in tree & continue iteration
+                node = node.parent
+
+        print("your expression tree is built:)")
+
+    def is_binaryOpr(self,char):
+        if (char == '+' or char == '-' or char == '*' or char == '/' or char == '^'):
+            return True
+        return False
+
+    def is_unaryOpr(self,char):
+        if (char == 'sin' or char == 'log'):
+            return True
+        return False
+
+    def is_operator(self,char):
+        if (self.is_binaryOpr(char) or self.is_unaryOpr(char)):
+            return True
+        return False
 
     def preorder_trav(self):
         node = self.root
@@ -36,9 +76,14 @@ class Expression_Tree:
 bitree = Expression_Tree()
 print('1: prefixExp to tree\n2: parinfixExp to tree\n3: infixExp to tree\n4: postfixExp to tree\n5: Traverse Preorder\n6: Travers Inorder\n7: Traverse Postorder\n 8: exit')
 select = int(input("choose a number: "))
-if (select == 5):
+if (select == 2):
+    infixExpr = input('enter your infix expression: ')
+    bitree.parInfixExpr_to_tree(infixExpr)
+elif (select == 5):
     bitree.preorder_trav()
 elif (select == 6):
     bitree.inorder_trav
 elif (select == 7):
     bitree.postorder_trav
+
+# 3+((5+9)*2)
