@@ -1,5 +1,6 @@
 # Python3 program to construct an expression tree
-# from prefix expression
+from collections import deque
+
 
 # Represents a node of the required tree
 class node:
@@ -8,7 +9,7 @@ class node:
 		self.left=self.right=None
 
 # Function to recursively build the expression tree
-def pstfix_to_tree(a):
+def prefix_to_tree(a):
 
 	# If its the end of the expression
 	if (a == ''):
@@ -22,11 +23,48 @@ def pstfix_to_tree(a):
 		# both the children set to null
 		p=node(a[0])
 		# Build the left sub-tree
-		p.left,q=pstfix_to_tree(a[1:])
+		p.left,q=prefix_to_tree(a[1:])
 		# Build the right sub-tree
-		p.right,q=pstfix_to_tree(q)
+		p.right,q=prefix_to_tree(q)
 		return p,q
-		
+
+
+# Function to construct an expression tree from the given postfix expression
+def postfix_to_tree(a):
+ 
+    # base case
+    if not a:
+        return
+ 
+    # create an empty stack to store tree pointers
+    s = deque()
+ 
+    # traverse the postfix expression
+    for c in a:
+        # if the current token is an operator
+        if c == '+' or c == '-' or c == '*' or c == '/' or c == '^':
+            # pop two nodes `x` and `y` from the stack
+            x = s.pop()
+            y = s.pop()
+ 
+            # construct a new binary tree whose root is the operator and whose
+            # left and right children point to `y` and `x`, respectively
+            Nodee = node(c)
+            Nodee.left = y
+            Nodee.right = x
+
+ 
+            # push the current node into the stack
+            s.append(Nodee)
+ 
+        # if the current token is an operand, create a new binary tree node
+        # whose root is the operand and push it into the stack
+        else:
+            s.append(node(c))
+ 
+    # a pointer to the root of the expression tree remains on the stack
+    return s[-1]
+
 
 # Function to print the infix expression for the tree
 def infixtraverse(p): #recursion
@@ -58,17 +96,23 @@ def prefixtraverse(p):
 		prefixtraverse(p.right)
 
 
-# Driver code
-if __name__ == '__main__':
-	
-	a = "*+ab-cd"
-	s,a=pstfix_to_tree(a)
-	print("The Infix expression is:")
-	infixtraverse(s)
-	print()
-	print("The Postfix expression is:")
-	posttraverse(s)
-	print()
-	print("prefix traverse will give us the same expression: ")
-	print(prefixtraverse(s))
+# Driver code for prefix
+a = "*+ab-cd"
+s,a=prefix_to_tree(a)
+print("The Infix expression is:")
+infixtraverse(s)
+print()
+print("The Postfix expression is:")
+posttraverse(s)
+print()
+print("prefix traverse will give us the same expression: ")
+print(prefixtraverse(s))
+# Driver code for infix
+print("\n")
+postfix = 'ab+cde+**'
+root = postfix_to_tree(postfix)
+print('Postfix Expression: ', end='')
+posttraverse(root)
+print('\nInfix Expression: ', end='')
+infixtraverse(root)
 
