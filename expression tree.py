@@ -73,10 +73,34 @@ class Expression_Tree:
 
 
 
+def prefix_to_tree(a):
+ 
+    # If its the end of the expression
+    if (a == ''):
+        print("your expression tree is built:)")
+        return ''
+ 
+    # If the character is an operand
+    if a[0]>='a' and a[0]<='z':
+        return ExpressionTree_node(a[0]),a[1:]
+    else:
+        # Create a node with a[0] as the data and
+        # both the children set to null
+        p=ExpressionTree_node(a[0])
+        # Build the left sub-tree
+        p.left,q=prefix_to_tree(a[1:])
+        # Build the right sub-tree
+        p.right,q=prefix_to_tree(q)
+        return p,q
+
+
 bitree = Expression_Tree()
 print('1: prefixExp to tree\n2: parinfixExp to tree\n3: infixExp to tree\n4: postfixExp to tree\n5: Traverse Preorder\n6: Travers Inorder\n7: Traverse Postorder\n 8: exit')
 select = int(input("choose a number: "))
-if (select == 2):
+if (select == 1):
+    prefixExpr = input('enter your prefix expression: ')
+    prefix_to_tree(prefixExpr)
+elif (select == 2):
     infixExpr = input('enter your infix expression: ')
     bitree.parInfixExpr_to_tree(infixExpr)
 elif (select == 5):
