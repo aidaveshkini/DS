@@ -8,7 +8,7 @@ class node:
 		self.left=self.right=None
 
 # Function to recursively build the expression tree
-def add(a):
+def pstfix_to_tree(a):
 
 	# If its the end of the expression
 	if (a == ''):
@@ -22,41 +22,53 @@ def add(a):
 		# both the children set to null
 		p=node(a[0])
 		# Build the left sub-tree
-		p.left,q=add(a[1:])
+		p.left,q=pstfix_to_tree(a[1:])
 		# Build the right sub-tree
-		p.right,q=add(q)
+		p.right,q=pstfix_to_tree(q)
 		return p,q
 		
 
 # Function to print the infix expression for the tree
-def inr(p): #recursion
+def infixtraverse(p): #recursion
 
 	if (p == None):
 		return
 	else:
-		inr(p.left)
+		infixtraverse(p.left)
 		print(p.data,end=' ')
-		inr(p.right)
+		infixtraverse(p.right)
 
 # Function to print the postfix expression for the tree
-def postr(p):
+def posttraverse(p):
 
 	if (p == None):
 		return
 	else:
-		postr(p.left)
-		postr(p.right)
+		posttraverse(p.left)
+		posttraverse(p.right)
 		print(p.data,end=' ')
+
+def prefixtraverse(p):
+
+	if (p == None):
+		return 
+	else:
+		print(p.data,end=' ')
+		prefixtraverse(p.left)
+		prefixtraverse(p.right)
+
 
 # Driver code
 if __name__ == '__main__':
 	
 	a = "*+ab-cd"
-	s,a=add(a)
+	s,a=pstfix_to_tree(a)
 	print("The Infix expression is:")
-	inr(s)
+	infixtraverse(s)
 	print()
 	print("The Postfix expression is:")
-	postr(s)
+	posttraverse(s)
+	print()
+	print("prefix traverse will give us the same expression: ")
+	print(prefixtraverse(s))
 
-# This code is contributed by Amartya Ghosh
