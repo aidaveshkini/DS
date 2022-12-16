@@ -113,11 +113,7 @@ def postfix_to_tree(a):
 bitree = Expression_Tree()
 print('1: prefixExp to tree\n2: parinfixExp to tree\n3: infixExp to tree\n4: postfixExp to tree\n5: Traverse Preorder\n6: Travers Inorder\n7: Traverse Postorder\n 8: exit')
 select = int(input("choose a number: "))
-if (select == 1):
-    prefixExpr = input('enter your prefix expression: ')
-    p = prefix_to_tree(prefixExpr)
-    inr(p)
-elif (select == 2):
+if (select == 2):
     infixExpr = input('enter your infix expression: ')
     bitree.parInfixExpr_to_tree(infixExpr)
 elif (select == 4):
