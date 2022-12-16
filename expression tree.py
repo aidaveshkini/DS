@@ -96,7 +96,6 @@ def prefix_to_tree(a):
  
     # If its the end of the expression
     if (a == ''):
-        print("your expression tree is built:)")
         return ''
  
     # If the character is an operand
@@ -107,15 +106,36 @@ def prefix_to_tree(a):
         # both the children set to null
         p=ExpressionTree_node(a[0])
         # Build the left sub-tree
-        p.left,q=prefix_to_tree(a[1:])
+        p.left_child,q=prefix_to_tree(a[1:])
         # Build the right sub-tree
-        p.right,q=prefix_to_tree(q)
+        p.right_child,q=prefix_to_tree(q)
         return p,q
+
+
+# Function to print the infix expression for the tree
+def inr(p): #recursion
+ 
+    if (p == None):
+        return
+    else:
+        inr(p.left_child)
+        print(p.data,end=' ')
+        inr(p.right_child)
+ 
+# Function to print the postfix expression for the tree
+def postr(p):
+ 
+    if (p == None):
+        return
+    else:
+        postr(p.left_child)
+        postr(p.right_child)
+        print(p.data,end=' ')
 
 
 def postfix_to_tree(a):
     nodes_stack = stack()
-    for i in a :
+    for i in range (len(a)):
         # If the character is an operand
         if a[i]>='a' and a[i]<='z':
             nodes_stack.push(a[i])
@@ -137,13 +157,15 @@ print('1: prefixExp to tree\n2: parinfixExp to tree\n3: infixExp to tree\n4: pos
 select = int(input("choose a number: "))
 if (select == 1):
     prefixExpr = input('enter your prefix expression: ')
-    prefix_to_tree(prefixExpr)
+    p = prefix_to_tree(prefixExpr)
+    inr(p)
 elif (select == 2):
     infixExpr = input('enter your infix expression: ')
     bitree.parInfixExpr_to_tree(infixExpr)
 elif (select == 4):
     postfixExpr = input('enter your postfix expression: ')
     postfix_to_tree(postfixExpr)
+    
 elif (select == 5):
     bitree.preorder_trav()
 elif (select == 6):
