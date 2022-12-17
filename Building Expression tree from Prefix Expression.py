@@ -10,7 +10,7 @@ class node:
 
 # Function to recursively build the expression tree
 def prefix_to_tree(a):
-
+	#base case
 	# If its the end of the expression
 	if (a == ''):
 		return ''
@@ -67,53 +67,53 @@ def postfix_to_tree(a):
 
 
 # Function to print the infix expression for the tree
-def infixtraverse(p): #recursion
+def inordertraverse(p): #recursion
 
 	if (p == None):
 		return
 	else:
-		infixtraverse(p.left)
+		inordertraverse(p.left)
 		print(p.data,end=' ')
-		infixtraverse(p.right)
+		inordertraverse(p.right)
 
 # Function to print the postfix expression for the tree
-def posttraverse(p): #recursion
+def postordertraverse(p): #recursion
 
 	if (p == None):
 		return
 	else:
-		posttraverse(p.left)
-		posttraverse(p.right)
+		postordertraverse(p.left)
+		postordertraverse(p.right)
 		print(p.data,end=' ')
 
 # Function to print the prefix expression for the tree
-def prefixtraverse(p): #recursion
+def preordertraverse(p): #recursion
 
 	if (p == None):
 		return 
 	else:
 		print(p.data,end=' ')
-		prefixtraverse(p.left)
-		prefixtraverse(p.right)
+		preordertraverse(p.left)
+		preordertraverse(p.right)
 
 
 # Driver code for prefix
 a = "*+ab-cd"
 s,a=prefix_to_tree(a)
 print("The Infix expression is:")
-infixtraverse(s)
+inordertraverse(s)
 print()
 print("The Postfix expression is:")
-posttraverse(s)
+postordertraverse(s)
 print()
 print("prefix traverse will give us the same expression: ")
-print(prefixtraverse(s))
+print(preordertraverse(s))
 # Driver code for infix
 print("\n")
 postfix = 'ab+cde+**'
 root = postfix_to_tree(postfix)
 print('Postfix Expression: ', end='')
-posttraverse(root)
+postordertraverse(root)
 print('\nInfix Expression: ', end='')
-infixtraverse(root)
+inordertraverse(root)
 
