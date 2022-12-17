@@ -87,43 +87,6 @@ class Expression_Tree:
 
 
 
-class stack:
-   def __init__(self):
-      self.arr = []
-   def push(self, data):
-      self.arr.append(data)
-   def pop(self):
-      try:
-         return self.arr.pop(-1)
-      except:
-         pass
-   def top(self):
-      try:
-         return self.arr[-1]
-      except:
-         pass
-   def size(self):
-      return len(self.arr)
-
-
-def postfix_to_tree(a):
-    nodes_stack = stack()
-    for i in range (len(a)):
-        # If the character is an operand
-        if a[i]>='a' and a[i]<='z':
-            nodes_stack.push(a[i])
-        else:
-            right = nodes_stack.pop()
-            left = nodes_stack.pop()
-            new_node = ExpressionTree_node(a[i])
-            new_node.left_child = left
-            new_node.right_child = right
-            nodes_stack.push(new_node)
-    TREE = Expression_Tree()
-    TREE.root = nodes_stack.pop()
-    return TREE
-
-
 
 #driver code for infixExpr to tree
 bitree2 = Expression_Tree()
@@ -139,9 +102,6 @@ while True:
     if (select == 2):
         parinfixExpr = str(input('enter your infix expression: '))
         bitree.parInfixExpr_to_tree(parinfixExpr)
-    elif (select == 4):
-        postfixExpr = input('enter your postfix expression: ')
-        postfix_to_tree(postfixExpr).postorder_trav()
     elif (select == 5):
         bitree.preorder_trav()
     elif (select == 6):
