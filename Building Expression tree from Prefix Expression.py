@@ -1,4 +1,4 @@
-# Python3 program to construct an expression tree
+# program to construct an expression tree
 from collections import deque
 
 
@@ -48,7 +48,7 @@ def postfix_to_tree(a):
             y = s.pop()
  
             # construct a new binary tree whose root is the operator and whose
-            # left and right children point to `y` and `x`, respectively
+            # left and right children point to `y` and `x`
             Nodee = node(c)
             Nodee.left = y
             Nodee.right = x
@@ -77,7 +77,7 @@ def infixtraverse(p): #recursion
 		infixtraverse(p.right)
 
 # Function to print the postfix expression for the tree
-def posttraverse(p):
+def posttraverse(p): #recursion
 
 	if (p == None):
 		return
@@ -86,7 +86,8 @@ def posttraverse(p):
 		posttraverse(p.right)
 		print(p.data,end=' ')
 
-def prefixtraverse(p):
+# Function to print the prefix expression for the tree
+def prefixtraverse(p): #recursion
 
 	if (p == None):
 		return 
