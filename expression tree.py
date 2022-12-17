@@ -9,6 +9,7 @@ class Expression_Tree:
     def __init__(self):
         self.root = None
 
+<<<<<<< HEAD
 # Function to print the infix expression for the tree🟥
     def inordertraverse(self): #recursion
         p = self.root
@@ -79,17 +80,77 @@ def postfix_to_tree(expr):#✅
     tree = Expression_Tree()
     tree.root = s[-1]
     return tree
+=======
+
+    def is_binaryOpr(self,char):
+        if (char == '+' or char == '-' or char == '*' or char == '/' or char == '^'):
+            return True
+        return False
+
+    def is_unaryOpr(self,char):
+        if (char == 'sin' or char == 'log'):
+            return True
+        return False
+
+    def is_operator(self,char):
+        if (self.is_binaryOpr(char) or self.is_unaryOpr(char)):
+            return True
+        return False
+
+    def preorder_trav(self):
+        node = self.root
+        if node:
+            print(node.data,end=' ')
+            node.left_child.preorder_trav
+            node.right_child.preorder_trav
+        return
+    def inorder_trav(self):
+        node = self.root
+        if node:
+            node.left_child.inorder_trav()
+            print(node.data,end=' ')
+            node.right_child.inorder_trav()
+        return
+    def postorder_trav(self):
+        node = self.root
+        if node:
+            node.left_child.postorder_trav()
+            node.right_child.postorder_trav()
+            print(node.data,end=' ')
+        return
+
+>>>>>>> d865c919c7d09e0b412a2fa1f973a89be4d7886a
 
 
 
 
 
+<<<<<<< HEAD
 tree = prefix
 
 
 
 #tree = postfix_to_tree('ab+')
 #tree.postordertraverse()
+=======
+bitree = Expression_Tree()
+while True:
+    print('1: prefixExp to tree\n2: parinfixExp to tree\n3: infixExp to tree\n4: postfixExp to tree')
+    print('5: Traverse Preorder\n6: Travers Inorder\n7: Traverse Postorder\n 8: exit\n')
+    select = int(input("choose a number: "))
+    if (select == 2):
+        parinfixExpr = str(input('enter your infix expression: '))
+        bitree.parInfixExpr_to_tree(parinfixExpr)
+    elif (select == 5):
+        bitree.preorder_trav()
+    elif (select == 6):
+        bitree.inorder_trav
+    elif (select == 7):
+        bitree.postorder_trav
+    elif (select == 8):
+        print("    finished;)")
+        break
+>>>>>>> d865c919c7d09e0b412a2fa1f973a89be4d7886a
 
 
 # (3+((5+9)*2)
