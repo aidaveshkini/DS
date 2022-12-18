@@ -40,7 +40,7 @@ class Expression_Tree:
 			subtree1.preordertraverse()
 			subtree2.preordertraverse()
 
-# Function to build the expression tree from a given prefix expression🟥
+# Function to build the expression tree from a given prefix expression
 def prefix_to_tree(a): #recursion
 
 	# If its the end of the expression
@@ -158,13 +158,15 @@ print('\n the prefix expression is:')
 tree.preordertraverse()
 print('\n\n')
 
-#driver code for prefix expression to tree & its traverses:🟥
-#tree = pretfix_to_tree('/+ab*cd')
-#print('the postfix expression is: ')
-#tree.postordertraverse()
-#print('\n the prefix expression is:')
-#tree.preordertraverse()
-#print('\n\n')
+#driver code for prefix expression to tree & its traverses:
+tupleee = prefix_to_tree('*+ab-cd')
+print('the postfix expression is: ')
+tree = Expression_Tree()
+tree.root = tupleee[0]
+tree.postordertraverse()
+print('\n the prefix expression is:')
+tree.preordertraverse()
+print('\n\n')
 
 
 #driver code for infix expression with complete parantesis to tree & its traverses:✅
@@ -178,13 +180,13 @@ print('\n\n')
 
 
 #driver code for infix expression to tree & its traverses:🟥
-print('infix expression is:  3+(5+9)*2')
-tree = infix_to_tree('3+(5+9)*2')
-print('the postfix expression is:  ')
-tree.postordertraverse()
-print('\n the prefix expression is:  ')
-tree.preordertraverse()
-print('\n\n')
+#print('infix expression is:  3+(5+9)*2')
+#tree = infix_to_tree('3+(5+9)*2')
+#print('the postfix expression is:  ')
+#tree.postordertraverse()
+#print('\n the prefix expression is:  ')
+#tree.preordertraverse()
+#print('\n\n')
 
 #driver code for infix to prefix:🟥
 #infix_to_prefix(3+(5+9)*2)
