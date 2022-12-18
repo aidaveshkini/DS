@@ -99,7 +99,7 @@ def postfix_to_tree(expr):#✅
 	return tree
 
 # Function to build the expression tree from a given infix expression with complete parantesis✅
-def parInfixExpr_to_tree(expr):
+def infix_to_tree(expr):
 	#first we create an empty-labeled node
 	node = ExprssionTree_node('empty')
 	#we iterate the string of expression & make the appropriate node for each character:
@@ -128,6 +128,7 @@ def parInfixExpr_to_tree(expr):
 			#so either its the right-side or left-side operand we go back to its parent node in tree & continue iterating
 			#go to the parent
 			node = node.parent
+	#go to the root
 	while (node.parent):
 		node = node.parent
 	your_tree = Expression_Tree()
@@ -171,7 +172,7 @@ print('\n\n')
 
 #driver code for infix expression with complete parantesis to tree & its traverses:✅
 print('parinfix expression is:  (3+((5+9)*2)')
-tree = parInfixExpr_to_tree('(3+((5+9)*2)')
+tree = infix_to_tree('(3+((5+9)*2)')
 print('the postfix expression is:  ')
 tree.postordertraverse()
 print('\n the prefix expression is:  ')
