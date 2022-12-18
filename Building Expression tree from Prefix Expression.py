@@ -108,7 +108,7 @@ posttraverse(s)
 print()
 print("prefix traverse will give us the same expression: ")
 print(prefixtraverse(s))
-# Driver code for infix
+# Driver code for postfix
 print("\n")
 postfix = 'ab+cde+**'
 root = postfix_to_tree(postfix)
