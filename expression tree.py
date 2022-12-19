@@ -1,6 +1,6 @@
 from collections import deque
 
-# Represents a node of the required tree✅
+# Represents a node of the required tree
 class ExprssionTree_node:
 	def __init__(self,data=None):
 		self.parent=None
@@ -11,7 +11,7 @@ class Expression_Tree:
 	def __init__(self):
 		self.root = None
 
-# Function to print the postfix expression for the tree✅
+# Function to print the postfix expression for the tree
 	def postordertraverse(self): #recursion
 		p = self.root
 		if (p == None):
@@ -24,9 +24,32 @@ class Expression_Tree:
 			subtree1.postordertraverse()
 			subtree2.postordertraverse()
 			print(p.data,end=' ')
-		
 
-# Function to print the prefix expression for the tree🟥
+
+# Print the infix expression for an expression tree
+	def inordertraverse(self):#recursion
+		p = self.root
+		if (p == None):
+			return
+	
+		# if the current token is an operator, print open parenthesis
+		if is_operator(self.root.data):
+			print('(', end='')
+		subtree1 = Expression_Tree()
+		subtree1.root = self.root.left
+		subtree2 = Expression_Tree()
+		subtree2.root= self.root.right
+		subtree1.inordertraverse()
+		print(p.data, end='')
+		subtree2.inordertraverse()
+	
+		# if the current token is an operator, print close parenthesis
+		if is_operator(self.root.data):
+			print(')', end='')
+ 
+	
+
+# Function to print the prefix expression for the tree
 	def preordertraverse(self): #recursion
 		p = self.root
 		if (p == None):
@@ -61,9 +84,8 @@ def prefix_to_tree(a): #recursion
 		return p,q
 
 # Function to build the expression tree from a given postfix expression
-def postfix_to_tree(expr):#✅
+def postfix_to_tree(expr):
  
-	# base case
 	if not expr:
 		return
  
@@ -98,7 +120,7 @@ def postfix_to_tree(expr):#✅
 	tree.root = s.pop()
 	return tree
 
-# Function to build the expression tree from a given infix expression with complete parantesis✅
+# Function to build the expression tree from a given infix expression with complete parantesis
 def infix_to_tree(expr):
 	#first we create an empty-labeled node
 	node = ExprssionTree_node('empty')
@@ -135,10 +157,8 @@ def infix_to_tree(expr):
 	your_tree.root = node
 	return your_tree
 
-def infix_to_tree(expr):
-	pass
 
-def is_operator(char):   #checks if the character is a binary operator✅
+def is_operator(char):   #checks if the character is a binary operator
 	if (char =='+' or char =='-' or char =='*' or char =='/' or char =='^'):
 		return True
 	return False
@@ -150,13 +170,15 @@ def infix_to_prefix(expr):
 
 
 
-#driver code for postfix expression to tree & its traverses:✅
+#driver code for postfix expression to tree & its traverses:
 print('postfix expression is:  ab+cde+**')
 tree = postfix_to_tree('ab+cde+**')
 print('the postfix expression is: ')
 tree.postordertraverse()
 print('\n the prefix expression is:')
 tree.preordertraverse()
+print('\n the infix expression is:')
+tree.inordertraverse()
 print('\n\n')
 
 #driver code for prefix expression to tree & its traverses:
@@ -167,27 +189,21 @@ tree.root = tupleee[0]
 tree.postordertraverse()
 print('\n the prefix expression is:')
 tree.preordertraverse()
+print('\n the infix expression is:')
+tree.inordertraverse()
 print('\n\n')
 
 
-#driver code for infix expression with complete parantesis to tree & its traverses:✅
+#driver code for infix expression with complete parantesis to tree & its traverses:
 print('parinfix expression is:  (3+((5+9)*2)')
 tree = infix_to_tree('(3+((5+9)*2)')
 print('the postfix expression is:  ')
 tree.postordertraverse()
 print('\n the prefix expression is:  ')
 tree.preordertraverse()
-print('\n\n')
+print('\n the infix expression is:')
+tree.inordertraverse()
 
 
-#driver code for infix expression to tree & its traverses:🟥
-#print('infix expression is:  3+(5+9)*2')
-#tree = infix_to_tree('3+(5+9)*2')
-#print('the postfix expression is:  ')
-#tree.postordertraverse()
-#print('\n the prefix expression is:  ')
-#tree.preordertraverse()
-#print('\n\n')
 
-#driver code for infix to prefix:🟥
-#infix_to_prefix(3+(5+9)*2)
+
