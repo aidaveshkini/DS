@@ -24,7 +24,30 @@ class Expression_Tree:
 			subtree1.postordertraverse()
 			subtree2.postordertraverse()
 			print(p.data,end=' ')
-		
+
+
+# Print the infix expression for an expression tree
+	def inordertraverse(self):#recursion
+		p = self.root
+		if (p == None):
+			return
+	
+		# if the current token is an operator, print open parenthesis
+		if is_operator(self.root.data):
+			print('(', end='')
+		subtree1 = Expression_Tree()
+		subtree1.root = self.root.left
+		subtree2 = Expression_Tree()
+		subtree2.root= self.root.right
+		subtree1.inordertraverse()
+		print(p.data, end='')
+		subtree2.inordertraverse()
+	
+		# if the current token is an operator, print close parenthesis
+		if is_operator(self.root.data):
+			print(')', end='')
+ 
+	
 
 # Function to print the prefix expression for the tree
 	def preordertraverse(self): #recursion
@@ -155,6 +178,8 @@ print('the postfix expression is: ')
 tree.postordertraverse()
 print('\n the prefix expression is:')
 tree.preordertraverse()
+print('\n the infix expression is:')
+tree.inordertraverse()
 print('\n\n')
 
 #driver code for prefix expression to tree & its traverses:
@@ -165,6 +190,8 @@ tree.root = tupleee[0]
 tree.postordertraverse()
 print('\n the prefix expression is:')
 tree.preordertraverse()
+print('\n the infix expression is:')
+tree.inordertraverse()
 print('\n\n')
 
 
