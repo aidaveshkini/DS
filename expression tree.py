@@ -86,7 +86,6 @@ def prefix_to_tree(a): #recursion
 # Function to build the expression tree from a given postfix expression
 def postfix_to_tree(expr):
  
-	# base case
 	if not expr:
 		return
  
