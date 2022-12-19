@@ -202,7 +202,9 @@ print('the postfix expression is:  ')
 tree.postordertraverse()
 print('\n the prefix expression is:  ')
 tree.preordertraverse()
-print('\n\n')
+print('\n the infix expression is:')
+tree.inordertraverse()
+
 
 
 
