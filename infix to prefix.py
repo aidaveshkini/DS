@@ -1,6 +1,6 @@
 
-
-class Node: #✅
+# class of stack node
+class Node:
     def __init__(self, value):
         self.value = value
         self.next = None
@@ -36,9 +36,12 @@ class Stack:
         self.head.next = self.head.next.next
         self.size -= 1
         return remove.value
-        # Get the current size of the stack
+
+    # Get the current size of the stack
     def getSize(self):
         return self.size
+
+    #print all elements in the stack🟥
     def print(self):
         cur = self.head.next
         out = ""
@@ -47,12 +50,16 @@ class Stack:
             cur = cur.next
         return out[:-2]
 
-def is_operator(char):   #checks if the character is a binary operator✅
+
+
+#checks if the character is a binary operator
+def is_operator(char):   
 	if (char =='+' or char =='-' or char =='*' or char =='/' or char == '^'):
 		return True
 	return False
 
-def preced(operator): #define the precedence of the operators✅
+#define the precedence of the operators
+def preced(operator): 
     if (operator == "+" or operator == "-"):
         return 1
     if (operator == "*" or operator == "/"):
@@ -60,11 +67,12 @@ def preced(operator): #define the precedence of the operators✅
     if (operator == "^"):
         return 3
 
-def reverse(expr):   ##get an expression as argument & Reverse it✅
-    x = expr[::-1]
+#get an expression as argument & Reverse it
+def reverse(expr):   
+    x = expr[::-1]           #reverse by slicing
     rev_expr =""
     for c in x:
-        if c == "(":
+        if c == "(":         #also reverse the parantheses
             rev_expr = rev_expr + ")"
         elif c == ")":
             rev_expr = rev_expr + "("
@@ -73,46 +81,45 @@ def reverse(expr):   ##get an expression as argument & Reverse it✅
     return rev_expr
 
 
-    
-def infix_to_postfix(expr): #convert infix expression to postfix expression
+#convert infix expression to postfix expression    
+def infix_to_postfix(expr): 
     postfix = ""
-    s = Stack()
-    for c in expr:  #itrate the expression string
-        if c == "(":  # open parenthesis 
-            s.push("(")
-            print(s.isEmpty())
-            print(s.print())
+    s = Stack()               #creat an empty stack to store operators & paranthesis
+    for c in expr:           
+        if c == "(":          #for the caracters:open parenthesis :
+            s.push("(")       
           
-        elif c == "^":
-            s.push("^")
+        elif c == "^":        #for the caracters:power :
+            s.push("^")       
   
-        elif is_operator(c):
-            if s.isEmpty():
-                s.push(c)
+        elif is_operator(c):  #for the caracters:operators :
+            if s.isEmpty():       #if caracter:operator & stack:empty
+                s.push(c)         
                
-            elif s.Top()== "(":
+            elif s.Top()== "(":   #if caracter:operator & stack.top: (
                 s.push(c)
 
-            else:   # s.top is an operator too
+            else:                 #if both character & s.top are operators
+                                  #while stack.top is precedent:
                 while not (s.isEmpty()) and preced(s.Top()) >= preced(c):
-                    postfix = postfix + "%s"%(s.Top())
-                    s.pop()
-                    if not s.isEmpty() and s.Top() == "(":
-                        s.pop()  
-                        break
-
+                    postfix = postfix + "%s"%(s.Top())   #add stack.top into postfix string
+                    s.pop()                              #delete s.top
+                    if not s.isEmpty() and s.Top() == "(":    #but if next s.top is ( ,
+                        s.pop()                               #delete the ( from stack,
+                        break                                 #& end the adding into postfix expr,
+                                                              #& push the c:operator in stack
                 s.push(c)
 
 
-        elif c == ")": # close parenthesis
-            while s.Top() != "(" and not s.isEmpty():
-                postfix = postfix + "%s"%(s.Top())
-                s.pop()
-            s.pop()
+        elif c == ")":         #for the characters:close parenthesis:
+            while s.Top() != "(" and not s.isEmpty():  #until reaching ( ,
+                postfix = postfix + "%s"%(s.Top())     #add the stack operators into postfix str
+                s.pop()                                #delete the added operators
+            s.pop()                                    #then add the c:operator
 
 
-        else:   #if the c is an operand
-            postfix = postfix + "%s"%(c)
+        else:                 #for the characters:operand:
+            postfix = postfix + "%s"%(c)   #add them into postfix string
 
     while not s.isEmpty(): #when itrating the infix expression ends,
                            #insert all the remainig operators in the stack after the postfix expression
@@ -122,12 +129,20 @@ def infix_to_postfix(expr): #convert infix expression to postfix expression
     return postfix
 
 
-
+#convert infix expression to prefix expression    
 def infix_to_prefix(expr):
-    rev = reverse(expr)
-    postfix = infix_to_postfix(rev)
-    prefix = reverse(postfix)
+    rev = reverse(expr)    #first reverse the infix expr
+    postfix = infix_to_postfix(rev)   #convert the reversed expr to postfix
+    prefix = reverse(postfix)         #again reverse the postfix expr to get prefix one
     return prefix
 
-print(infix_to_prefix("a+b-(c^d)"))
+
+expr = "a+b-(c^d)"
+print("the infix expression is:  %s"%(expr))
+print("if we reverse it:", end="  ")
+print (reverse(expr))
+print("convert to postfix:",end="  ")
+print(infix_to_postfix(reverse(expr)))
+print("reverse it again:",end="  ")
+print(infix_to_prefix(expr))
 
