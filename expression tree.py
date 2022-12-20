@@ -11,22 +11,24 @@ class Expression_Tree:
 	def __init__(self):
 		self.root = None
 
-# Function to print the postfix expression for the tree
+# print the postfix expression for the tree
 	def postordertraverse(self): #recursion
 		p = self.root
 		if (p == None):
 			return
 		else:
+	        #travers the left & right subtrees:      
 			subtree1 = Expression_Tree()
 			subtree1.root= self.root.left
 			subtree2 = Expression_Tree()
 			subtree2.root= self.root.right
 			subtree1.postordertraverse()
 			subtree2.postordertraverse()
-			print(p.data,end=' ')
+			#print the roots data
+			print(p.data,end=' ')        
 
 
-# Print the infix expression for an expression tree
+# Print the infix expression for the tree
 	def inordertraverse(self):#recursion
 		p = self.root
 		if (p == None):
@@ -35,6 +37,7 @@ class Expression_Tree:
 		# if the current token is an operator, print open parenthesis
 		if is_operator(self.root.data):
 			print('(', end='')
+		#print the root data between subtrees traverses
 		subtree1 = Expression_Tree()
 		subtree1.root = self.root.left
 		subtree2 = Expression_Tree()
@@ -56,6 +59,7 @@ class Expression_Tree:
 			return 
 		else:
 			print(p.data,end=' ')
+			#travers the left & right subtrees:      
 			subtree1 = Expression_Tree()
 			subtree1.root= self.root.left
 			subtree2 = Expression_Tree()
@@ -162,10 +166,6 @@ def is_operator(char):   #checks if the character is a binary operator
 	if (char =='+' or char =='-' or char =='*' or char =='/' or char =='^'):
 		return True
 	return False
-
-def infix_to_prefix(expr):
-	tree = infix_to_tree(expr)
-	tree.preordertraverse()
 
 
 
